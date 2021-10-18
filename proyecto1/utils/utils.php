@@ -1,16 +1,17 @@
-
 <?php
-function esOpcionMenuActiva($option){
-    if ($_SERVER["REQUEST_URI"] == $option){
+function esOpcionMenuActiva(string $option): bool{
+    if (strpos($_SERVER["REQUEST_URI"], "/". $option) === 0 ){
         return true;
-    }else{
+    }elseif ("/" === $_SERVER["REQUEST_URI"] && ("index" == $option)){
+        return true;
+    }else   
         return false;
-    }
 }
-
-function  existeOpcionMenuActivaEnArray($options){
-    foreach($options as $option){
-        esOpcionMenuActiva($option);
+function  existeOpcionMenuActivaEnArray(array $options): bool{
+    foreach ($options as $option){
+        if (esOpcionMenuActiva($option)) {
+            return true;
+        }
     }
+    return false;
 }
-?>
