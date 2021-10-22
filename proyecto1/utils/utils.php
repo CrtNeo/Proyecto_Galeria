@@ -15,3 +15,9 @@ function  existeOpcionMenuActivaEnArray(array $options): bool{
     }
     return false;
 }
+function sanitizeInput(string $data) : string{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
