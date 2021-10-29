@@ -15,4 +15,13 @@
  $galeria[] = new ImagenGaleria("11.jpg", "Descripcion imagen 11", 13, 4, 0);
  $galeria[] = new ImagenGaleria("12.jpg", "Descripcion imagen 12", 15, 1, 1);
 
+require_once "./entity/asociado.php";
+$asociados[] = new Asociado("Logo", "Descripcion imagen 1", "logo.JPG");
+$asociados[] = new Asociado("Logo2", "Descripcion imagen 2", "thumbnail.jpg");
+$asociados[] = new Asociado("Logo3", "Descripcion imagen 3", "thumbnail_2.jpg");
+$asociados[] = new Asociado("Logo4", "Descripcion imagen 4", "index.jpg");
+
+
+$asociados = getAsociados($asociados);
+
 include("./views/index.view.php");

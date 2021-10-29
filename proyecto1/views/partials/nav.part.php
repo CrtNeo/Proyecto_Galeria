@@ -31,6 +31,10 @@
                 <a href="<?= (esOpcionMenuActiva("galeria")? "#" : "/galeria.php");?>">
                 <i class="fa fa-image sr-icons"></i> Galeria</a>
               </li>  
+              <li class="<?= (esOpcionMenuActiva("asociados")? "active" : "");?> lien">
+                <a href="<?= (esOpcionMenuActiva("asociados")? "#" : "/asociados.php");?>">
+                <i class="fa fa-hand-o-right"></i> Asociados</a>
+              </li> 
             </ul>
          </div>
      </div>
