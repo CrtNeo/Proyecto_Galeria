@@ -1,42 +1,37 @@
 <?php
-class ImagenGaleria 
+class ImagenGaleria
 {
-
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
-
     const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';
-
-    public function getUrlPortfolio() : string
-
-    {
-
-        return self::RUTA_IMAGENES_PORTFOLIO . $this->getNombre();
-
-    }
-
-    public function getUrlGallery() : string
-
-    {
-
-        return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
-
-    }
-
+    /**
+     * @var string
+     */
     private $nombre;
 
+    /**
+     * @var string
+     */
     private $descripcion;
-
+    
+    /**
+     * @var int
+     */
     private $numVisualizaciones;
-
+    
+    /**
+     * @var int
+     */
     private $numLikes;
 
+    /**
+     * @var int
+     */
     private $numDownloads;
-
+    
 
     public function __construct(string $nombre, string $descripcion,
                                 int $numVisualizaciones = 0, int $numLikes = 0,
                                 int $numDownloads = 0){
-            
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->numVisualizaciones = $numVisualizaciones;
@@ -45,9 +40,10 @@ class ImagenGaleria
 
     }
 
-
     /**
      * Get the value of nombre
+     *
+     * @return  string
      */ 
     public function getNombre()
     {
@@ -57,9 +53,11 @@ class ImagenGaleria
     /**
      * Set the value of nombre
      *
+     * @param  string  $nombre
+     *
      * @return  self
      */ 
-    public function setNombre($nombre)
+    public function setNombre(string $nombre)
     {
         $this->nombre = $nombre;
 
@@ -68,6 +66,8 @@ class ImagenGaleria
 
     /**
      * Get the value of descripcion
+     *
+     * @return  string
      */ 
     public function getDescripcion()
     {
@@ -77,9 +77,11 @@ class ImagenGaleria
     /**
      * Set the value of descripcion
      *
+     * @param  string  $descripcion
+     *
      * @return  self
      */ 
-    public function setDescripcion($descripcion)
+    public function setDescripcion(string $descripcion)
     {
         $this->descripcion = $descripcion;
 
@@ -88,6 +90,8 @@ class ImagenGaleria
 
     /**
      * Get the value of numVisualizaciones
+     *
+     * @return  int
      */ 
     public function getNumVisualizaciones()
     {
@@ -97,9 +101,11 @@ class ImagenGaleria
     /**
      * Set the value of numVisualizaciones
      *
+     * @param  int  $numVisualizaciones
+     *
      * @return  self
      */ 
-    public function setNumVisualizaciones($numVisualizaciones)
+    public function setNumVisualizaciones(int $numVisualizaciones)
     {
         $this->numVisualizaciones = $numVisualizaciones;
 
@@ -108,6 +114,8 @@ class ImagenGaleria
 
     /**
      * Get the value of numLikes
+     *
+     * @return  int
      */ 
     public function getNumLikes()
     {
@@ -117,9 +125,11 @@ class ImagenGaleria
     /**
      * Set the value of numLikes
      *
+     * @param  int  $numLikes
+     *
      * @return  self
      */ 
-    public function setNumLikes($numLikes)
+    public function setNumLikes(int $numLikes)
     {
         $this->numLikes = $numLikes;
 
@@ -128,6 +138,8 @@ class ImagenGaleria
 
     /**
      * Get the value of numDownloads
+     *
+     * @return  int
      */ 
     public function getNumDownloads()
     {
@@ -137,12 +149,34 @@ class ImagenGaleria
     /**
      * Set the value of numDownloads
      *
+     * @param  int  $numDownloads
+     *
      * @return  self
      */ 
-    public function setNumDownloads($numDownloads)
+    public function setNumDownloads(int $numDownloads)
     {
         $this->numDownloads = $numDownloads;
 
         return $this;
+    }
+    
+    /**
+     * Devuelve el path a las imágenes del portfolio
+     *
+     * @return string
+     */
+    public function getUrlPortfolio() : string
+    {
+        return self::RUTA_IMAGENES_PORTFOLIO . $this->getNombre();
+    }
+
+    /**
+     * Devuelve el path a las imágenes de la galería
+     *
+     * @return string
+     */
+    public function getUrlGallery() : string
+    {
+        return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
     }
 }

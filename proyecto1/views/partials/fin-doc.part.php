@@ -8,6 +8,5 @@
    <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
    <script type="text/javascript" src="js/scrollreveal.min.js"></script>
    <script type="text/javascript" src="js/script.js"></script>
-
-   </body>
+</body>
 </html>
