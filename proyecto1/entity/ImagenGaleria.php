@@ -1,5 +1,7 @@
 <?php
-class ImagenGaleria
+require_once __DIR__ .'/Entity.php';
+
+class ImagenGaleria extends Entity
 {
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
     const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';
@@ -29,16 +31,75 @@ class ImagenGaleria
     private $numDownloads;
     
 
-    public function __construct(string $nombre, string $descripcion,
-                                int $numVisualizaciones = 0, int $numLikes = 0,
-                                int $numDownloads = 0){
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-        $this->numVisualizaciones = $numVisualizaciones;
-        $this->numLikes = $numLikes;
-        $this->numDownloads = $numDownloads;
+    private $id;
 
+    private $categoria;
+
+    // .....
+    
+    public function __construct(string $nombre = '', string $descripcion = '',
+
+    int $numVisualizaciones = 0, int $numLikes = 0,
+
+    int $numDownloads = 0, int $categoria = 0){
+
+$this->id = null;
+
+$this->nombre = $nombre;
+
+$this->descripcion = $descripcion;
+
+$this->numVisualizaciones = $numVisualizaciones;
+
+$this->numLikes = $numLikes;
+
+$this->numDownloads = $numDownloads;
+
+$this->categoria = $categoria;
+
+}
+    
+    //.....
+    
+    /**
+    
+     * @return int|null
+    
+     */
+    
+    public function getId()
+    
+    {
+    
+        return $this->id;
+    
     }
+    
+    /**
+    
+     * Set the value of id
+    
+     *
+    
+     * @param  int  $id
+    
+     *
+    
+     * @return  self
+    
+     */ 
+    
+    public function setId(int $id)
+    
+    {
+    
+        $this->id = $id;
+    
+        return $this;
+    
+    }
+    
+    //....
 
     /**
      * Get the value of nombre
@@ -179,4 +240,46 @@ class ImagenGaleria
     {
         return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
     }
+
+    public function getCategoria()
+
+    {
+
+        return $this->categoria;
+
+    }
+    
+    public function setCategoria(int $categoria)
+
+    {
+
+        $this->categoria = $categoria;
+
+        return $this;
+
+    }
+
+public function toArray(): array
+
+{
+
+    return [
+
+        'id' => $this->getId(),
+
+        'nombre' => $this->getNombre(),
+
+        'descripcion' => $this->getDescripcion(),
+
+        'numVisualizaciones' => $this->getNumVisualizaciones(),
+
+        'numLikes' => $this->getNumLikes(),
+
+        'numDownloads' => $this->getNumDownloads(),
+
+        'categoria' => $this->getCategoria()
+
+    ];
+
+}
 }
