@@ -66,8 +66,7 @@
 
                 <td><?= $imagen->getNumDownloads(); ?></td>
 
-                <td><?= $imagen->getCategoria(); ?></td>
-
+                <td><?= $repositorio->getCategoria($imagen)->getNombre(); ?></td>
             </tr>
 
         <?php endforeach; ?>

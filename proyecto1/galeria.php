@@ -97,9 +97,8 @@
               $parameters = [':nombre' => $file->getFileName(),
                 ':descripcion' => $description->getValue()];
                 
-                $imagenGaleria = new ImagenGaleria($file->getFileName(), $description->getValue());
+                $imagenGaleria = new ImagenGaleria($file->getFileName(), $description->getValue(), 0, 0,  0, $categoriasEl->getValue());
                 $repositorio->save($imagenGaleria);
-                $queryBuilder->save($imagenGaleria);
                 $info = 'Imagen enviada correctamente';
                 $urlImagen = ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName();
                 $form->reset();
