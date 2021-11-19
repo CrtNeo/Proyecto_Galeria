@@ -24,8 +24,6 @@
 
     $info = $urlImagen = "";
 
-    $repositorio = new ImagenGaleriaRepository();
-
     $description = new TextareaElement();
     $description
      ->setName('descripcion')
