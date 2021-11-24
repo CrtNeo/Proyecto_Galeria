@@ -14,6 +14,7 @@
     require_once "./exceptions/FileException.php";
     require_once "./utils/SimpleImage.php";
     require_once "./entity/Asociado.php";
+    require_once "./repository/AsociadoRepository.php";
     
     $info = $urlImagen = "";
 
@@ -53,6 +54,11 @@
     ->appendChild($descriptionWrapper)
     ->appendChild($b);
 
+    $config = require_once 'app/config.php'; 
+    App::bind('config', $config);
+    App::bind('connection', Connection::make($config['database']));
+    $repositorio = new AsociadoRepository();
+
     if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         $form->validate();
         if (!$form->hasError()) {
@@ -66,6 +72,8 @@
               ->toFile(Asociado::RUTA_IMAGENES_ASOCIADO . $file->getFileName());
               $info = 'Imagen enviada correctamente'; 
               $urlImagen = Asociado::RUTA_IMAGENES_ASOCIADO . $file->getFileName();
+              $asociado = new Asociado($nombre->getValue(), $file->getFileName(), $description->getValue());
+              $repositorio->save($asociado);
               $form->reset();
             
           }catch(Exception $err) {

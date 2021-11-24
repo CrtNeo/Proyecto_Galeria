@@ -9,6 +9,10 @@
     require_once "./utils/Forms/custom/MyFormGroup.php";
     require_once "./utils/Forms/custom/MyFormControl.php";
     require_once "./utils/Validator/NotEmptyValidator.php";
+    require_once "./repository/MensajeRepository.php";
+    require_once "./core/App.php";
+
+
  
     $info = "";
     $firstName = new InputElement('text');
@@ -47,11 +51,17 @@
      ->setId('message');
     $messageWrapper = new MyFormGroup([new MyFormControl($message, 'Mensaje', 'col-xs-12')]);
 
+
     $b = new ButtonElement('Send');
     $b->setCssClass('pull-right btn btn-lg sr-button');
 
     $form = new FormElement();
-    
+
+    $config = require_once 'app/config.php'; 
+    App::bind('config', $config);
+    App::bind('connection', Connection::make($config['database']));
+    $repositorio = new MensajeRepository();
+
     $form
      ->setCssClass('form-horizontal')
      ->appendChild($name)
@@ -59,10 +69,13 @@
      ->appendChild($subjectWrapper)
      ->appendChild($messageWrapper)
      ->appendChild($b);
+
      if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         $form->validate();
         if (!$form->hasError()) {
           $info = "Mensaje insertado correctamente:";
+          $mensaje = new Mensaje($firstName->getValue(), $lastName->getValue(), $subject->getValue(), $email->getValue(),  $message->getValue());
+          $repositorio->save($mensaje);
           $form->reset();
         }else{
           if ($firstName->hasError()) {
@@ -75,5 +88,5 @@
             $email->setCssClass($email->getCssClass() . ' has-error');
           }
         }
-    }
+      }
   include("./views/contact.view.php");
