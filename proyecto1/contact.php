@@ -12,7 +12,7 @@
     require_once "./repository/MensajeRepository.php";
     require_once "./core/App.php";
 
-
+    session_start();
  
     $info = "";
     $firstName = new InputElement('text');

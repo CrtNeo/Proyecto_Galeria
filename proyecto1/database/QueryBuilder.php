@@ -14,7 +14,7 @@ abstract class QueryBuilder
 
     
 
-    private $connection;
+    protected $connection;
 
     /**
 
@@ -22,7 +22,7 @@ abstract class QueryBuilder
 
      */
 
-    private $table;
+    protected $table;
 
     /**
 
@@ -30,7 +30,7 @@ abstract class QueryBuilder
 
      */
 
-    private $classEntity;
+    protected $classEntity;
 
     public function __construct(string $table, string $classEntity)
 
@@ -137,5 +137,23 @@ abstract class QueryBuilder
             throw  new QueryException("Eroor al actualizar el elemento con id {$parameters['id']}: " . $pdoException->getMessage());
     
         }
+    }
+
+    public function findByUserNameAndPassword(string $username, string $password): ? Usuario{
+        $sql= "SELECT * FROM $this->table WHERE username = :username";
+        $parameters = ['username' => $username];
+
+            $statement = $this->connection->prepare($sql);
+            $statement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->classEntity);
+            $statement->execute($parameters);
+            $result = $statement->fetch();
+        if(empty($result)){
+                throw new NotFoundException("No se ha encontrado ningún usuario con esas credenciales");
+        }else{ 
+        if(!$this->passwordGenerator::passwordVerify($password, $result->getPassword())){
+            throw new NotFoundException("No se ha encontrado ningún elemento con esas credenciales");
+            } 
+        }
+        return $result;
     }
 } 

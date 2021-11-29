@@ -21,6 +21,13 @@
     require_once "./utils/Forms/SelectElement.php";
     require_once "./utils/Forms/OptionElement.php";
 
+    session_start();
+
+     if (!isset($_SESSION['username'])) {
+
+       header('location: /login.php');
+
+     }
 
     $info = $urlImagen = "";
 
